@@ -6,6 +6,8 @@
 package GUI;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -21,6 +23,7 @@ public class MainFrame extends javax.swing.JFrame {
          Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
          setBounds(0,0,screenSize.width, screenSize.height);
          setVisible(true);
+         em=Persistence.createEntityManagerFactory("AdvDatabaseProjectPU").createEntityManager();
     }
 
     /**
@@ -34,11 +37,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         Tabbedpane = new javax.swing.JTabbedPane();
         getAllEmployees = new GUI.GetAllEmployees();
+        employeeWithOrWithoutSupervisor1 = new GUI.EmployeeWithOrWithoutSupervisor();
+        empWithMinSalary1 = new GUI.EmployeesWithMinMaxSalary();
+        departmentWithAvgSalaries1 = new GUI.DepartmentWithAvgSalaries();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         Tabbedpane.addTab("All Employees", getAllEmployees);
+        Tabbedpane.addTab("With/out supervisor", employeeWithOrWithoutSupervisor1);
+        Tabbedpane.addTab("min Salary", empWithMinSalary1);
+        Tabbedpane.addTab("Departments with avg salaries", departmentWithAvgSalaries1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,9 +99,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    public static EntityManager em;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane Tabbedpane;
+    private GUI.DepartmentWithAvgSalaries departmentWithAvgSalaries1;
+    private GUI.EmployeesWithMinMaxSalary empWithMinSalary1;
+    private GUI.EmployeeWithOrWithoutSupervisor employeeWithOrWithoutSupervisor1;
     private GUI.GetAllEmployees getAllEmployees;
     // End of variables declaration//GEN-END:variables
 }

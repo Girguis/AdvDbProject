@@ -41,8 +41,16 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Employee.findByBdate", query = "SELECT e FROM Employee e WHERE e.bdate = :bdate")
     , @NamedQuery(name = "Employee.findByAddress", query = "SELECT e FROM Employee e WHERE e.address = :address")
     , @NamedQuery(name = "Employee.findBySex", query = "SELECT e FROM Employee e WHERE e.sex = :sex")
-    , @NamedQuery(name = "Employee.findBySalary", query = "SELECT e FROM Employee e WHERE e.salary = :salary")})
+    , @NamedQuery(name = "Employee.findBySalary", query = "SELECT e FROM Employee e WHERE e.salary = :salary")
+    , @NamedQuery(name = "Employee.findWithoutSupervisor", query = "SELECT e FROM Employee e WHERE e.superssn IS NULL")
+    , @NamedQuery(name = "Employee.findWithSupervisor", query = "SELECT e FROM Employee e WHERE e.superssn IS NOT NULL")
+    , @NamedQuery(name = "Employee.findByMinSalary", query = "SELECT e FROM Employee e WHERE e.salary = (SELECT MIN(minE.salary) FROM Employee minE)")
+    , @NamedQuery(name = "Employee.findByMaxSalary", query = "SELECT e FROM Employee e WHERE e.salary = (SELECT MAX(maxE.salary) FROM Employee maxE)")
+})
 public class Employee implements Serializable {
+
+    @Column(name = "phonenumber")
+    private String phonenumber;
 
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
@@ -94,7 +102,11 @@ public class Employee implements Serializable {
         this.fname = fname;
         this.lname = lname;
     }
-
+    
+    public String getFullName() {
+        return fname + " "+ minit + " "+ lname;
+    }
+    
     public String getFname() {
         return fname;
     }
@@ -234,6 +246,14 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "DBEntites.Employee[ ssn=" + ssn + " ]";
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
     
 }

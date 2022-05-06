@@ -49,6 +49,33 @@
             </Constraint>
           </Constraints>
         </Component>
+        <Component class="GUI.EmployeeWithOrWithoutSupervisor" name="employeeWithOrWithoutSupervisor1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="With/out supervisor">
+                <Property name="tabTitle" type="java.lang.String" value="With/out supervisor"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="GUI.EmployeesWithMinMaxSalary" name="empWithMinSalary1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="min Salary">
+                <Property name="tabTitle" type="java.lang.String" value="min Salary"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="GUI.DepartmentWithAvgSalaries" name="departmentWithAvgSalaries1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Departments with avg salaries">
+                <Property name="tabTitle" type="java.lang.String" value="Departments with avg salaries"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
