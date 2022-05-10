@@ -124,20 +124,19 @@ public class EmployeeWithOrWithoutSupervisor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void retriveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retriveDataMouseClicked
-       List<Employee> employees;
-       if(withRadioBtn.isSelected())
-           employees = em.createNamedQuery("Employee.findWithSupervisor").getResultList();
-       else
-           employees = em.createNamedQuery("Employee.findWithoutSupervisor").getResultList();
-       DefaultTableModel tableModel= (DefaultTableModel) tableOfData.getModel();
-       tableModel.setNumRows(0);
-       int i=1;
-       for(Employee e : employees)
-       {
-           String supervisorName= (e.getSuperssn()==null?"":e.getSuperssn().getFullName());
-           tableModel.addRow(new Object[]{i,e.getFullName(),supervisorName});
-           i++;
-       }
+        List<Employee> employees = em.createNamedQuery("Employee.findAll").getResultList();
+        DefaultTableModel tableModel = (DefaultTableModel) tableOfData.getModel();
+        tableModel.setNumRows(0);
+        int i = 1;
+        for (Employee e : employees) {
+            if (withRadioBtn.isSelected() && e.getSuperssn() != null) {
+                tableModel.addRow(new Object[]{i, e.getFullName(), e.getSuperssn().getFullName()});
+                i++;
+            } else if (withoutRadioBtn.isSelected() && e.getSuperssn() == null) {
+                tableModel.addRow(new Object[]{i, e.getFullName()});
+                i++;
+            }
+        }
     }//GEN-LAST:event_retriveDataMouseClicked
 
 

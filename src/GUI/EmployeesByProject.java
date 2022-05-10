@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import DBEntites.Department;
 import DBEntites.Employee;
 import DBEntites.Project;
 import static GUI.MainFrame.em;
@@ -15,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Girguis
+ * @author Momen
  */
 public class EmployeesByProject extends javax.swing.JPanel {
 
@@ -32,7 +31,6 @@ public class EmployeesByProject extends javax.swing.JPanel {
         for (Project p : Allprojects) {
             projectsList.addItem(p.getPname());
         }
-
     }
 
     /**
@@ -110,12 +108,6 @@ public class EmployeesByProject extends javax.swing.JPanel {
 
         jLabel1.setText("select project name");
 
-        projectsList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                projectsListActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("more salary");
 
         inSalary.setText(" ");
@@ -183,10 +175,6 @@ public class EmployeesByProject extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_retriveDataMouseClicked
-
-    private void projectsListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectsListActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_projectsListActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

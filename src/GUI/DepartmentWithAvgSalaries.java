@@ -8,7 +8,7 @@ package GUI;
 import DBEntites.Department;
 import DBEntites.Employee;
 import static GUI.MainFrame.em;
-import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -104,12 +104,9 @@ public class DepartmentWithAvgSalaries extends javax.swing.JPanel {
         tableModel.setNumRows(0);
         for(Department d : departments)
         {  
-          List<Employee> employees = (List<Employee>) d.getEmployeeCollection();
+          Collection<Employee> employees = d.getEmployeeCollection();
           Double salaries = 0.0;
-          for(Employee e : employees)
-          {
-              salaries +=Double.parseDouble(String.valueOf(e.getSalary()));
-          }
+          for(Employee e : employees) { salaries +=e.getSalary(); }
           tableModel.addRow(new Object[]{d.getDno(),d.getDname(),(salaries/employees.size())});
         }
     }//GEN-LAST:event_retriveMouseClicked

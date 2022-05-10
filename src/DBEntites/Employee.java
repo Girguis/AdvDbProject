@@ -6,7 +6,6 @@
 package DBEntites;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -42,8 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Employee.findByAddress", query = "SELECT e FROM Employee e WHERE e.address = :address")
     , @NamedQuery(name = "Employee.findBySex", query = "SELECT e FROM Employee e WHERE e.sex = :sex")
     , @NamedQuery(name = "Employee.findBySalary", query = "SELECT e FROM Employee e WHERE e.salary = :salary")
-    , @NamedQuery(name = "Employee.findWithoutSupervisor", query = "SELECT e FROM Employee e WHERE e.superssn IS NULL")
-    , @NamedQuery(name = "Employee.findWithSupervisor", query = "SELECT e FROM Employee e WHERE e.superssn IS NOT NULL")
     , @NamedQuery(name = "Employee.findByMinSalary", query = "SELECT e FROM Employee e WHERE e.salary = (SELECT MIN(minE.salary) FROM Employee minE)")
     , @NamedQuery(name = "Employee.findByMaxSalary", query = "SELECT e FROM Employee e WHERE e.salary = (SELECT MAX(maxE.salary) FROM Employee maxE)")
 })

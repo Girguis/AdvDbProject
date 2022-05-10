@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.persistence.EntityManager;
@@ -16,16 +17,14 @@ import javax.persistence.Persistence;
 public class MainFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form NewJFrame
+     * Creates new form MainFrame
      */
     public MainFrame() {
-        em=Persistence.createEntityManagerFactory("AdvDatabaseProjectPU").createEntityManager();
+        em = Persistence.createEntityManagerFactory("AdvDatabaseProjectPU").createEntityManager();
         initComponents();
-        
-         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-         setBounds(0,0,screenSize.width, screenSize.height);
-         setVisible(true);
-         
+//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        setBounds(0, 0, screenSize.width, screenSize.height);
+//        setVisible(true);
     }
 
     /**
@@ -37,21 +36,39 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        departmentEmployeesWithAvg1 = new GUI.DepartmentEmployeesWithAvg();
+        departmentWithAvgSalaries1 = new GUI.DepartmentWithAvgSalaries();
+        employeeByCountry1 = new GUI.EmployeeByCountry();
+        employeeWithOrWithoutSupervisor1 = new GUI.EmployeeWithOrWithoutSupervisor();
+        employeesByProject1 = new GUI.EmployeesByProject();
+        employeesWithMinMaxSalary1 = new GUI.EmployeesWithMinMaxSalary();
+        getAllEmployees1 = new GUI.GetAllEmployees();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addTab("DepartmentEmployeesWithAvg", departmentEmployeesWithAvg1);
+        jTabbedPane1.addTab("DepartmentWithAvgSalaries", departmentWithAvgSalaries1);
+        jTabbedPane1.addTab("EmployeeByCountry", employeeByCountry1);
+        jTabbedPane1.addTab("EmployeeWithOrWithoutSupervisor", employeeWithOrWithoutSupervisor1);
+        jTabbedPane1.addTab("EmployeesByProject", employeesByProject1);
+        jTabbedPane1.addTab("EmployeesWithMinMaxSalary", employeesWithMinMaxSalary1);
+        jTabbedPane1.addTab("GetAllEmployees", getAllEmployees1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 869, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1495, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
     /**
      * @param args the command line arguments
      */
@@ -78,9 +95,6 @@ public class MainFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -91,5 +105,13 @@ public class MainFrame extends javax.swing.JFrame {
     }
     public static EntityManager em;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private GUI.DepartmentEmployeesWithAvg departmentEmployeesWithAvg1;
+    private GUI.DepartmentWithAvgSalaries departmentWithAvgSalaries1;
+    private GUI.EmployeeByCountry employeeByCountry1;
+    private GUI.EmployeeWithOrWithoutSupervisor employeeWithOrWithoutSupervisor1;
+    private GUI.EmployeesByProject employeesByProject1;
+    private GUI.EmployeesWithMinMaxSalary employeesWithMinMaxSalary1;
+    private GUI.GetAllEmployees getAllEmployees1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Girguis
+ * @author Momen
  */
 public class DepartmentEmployeesWithAvg extends javax.swing.JPanel {
 
@@ -23,18 +23,17 @@ public class DepartmentEmployeesWithAvg extends javax.swing.JPanel {
      * Creates new form EmployeeWithOrWithoutSupervisor
      */
     public DepartmentEmployeesWithAvg() {
-        
         initComponents();
         initList();
-       
     }
-private void initList(){
-       List<Department> Alldepartment = em.createNamedQuery("Department.findAll").getResultList();
-        for(Department d: Alldepartment)
-        {
+
+    private void initList() {
+        List<Department> Alldepartment = em.createNamedQuery("Department.findAll").getResultList();
+        for (Department d : Alldepartment) {
             departmentsList.addItem(d.getDname());
         }
-}
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,11 +55,6 @@ private void initList(){
         retriveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 retriveDataMouseClicked(evt);
-            }
-        });
-        retriveData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                retriveDataActionPerformed(evt);
             }
         });
 
@@ -88,19 +82,18 @@ private void initList(){
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1057, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1026, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("select department");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("note: greater than avg salaries in this department");
 
@@ -121,9 +114,9 @@ private void initList(){
                     .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
                         .addComponent(retriveData, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(1, 1, 1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,40 +129,29 @@ private void initList(){
                 .addComponent(retriveData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void retriveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retriveDataMouseClicked
-       
-       Department department = (Department) em.createNamedQuery("Department.findByDname").setParameter("dname", departmentsList.getSelectedItem().toString()).getSingleResult();
-       Collection<Employee> employees = department.getEmployeeCollection();
-       DefaultTableModel tableModel= (DefaultTableModel) tableOfData.getModel();
-       tableModel.setNumRows(0);
-       double avgSalary=0;
-       for(Employee e:employees)
-       {
-           avgSalary+=e.getSalary();
-       }
-       avgSalary/=employees.size();
-       int i=1;
-       for(Employee e : employees)
-       {
-           if(e.getSalary()>=avgSalary)
-           {
-               tableModel.addRow(new Object[]{i,e.getSsn(),e.getFullName(),e.getBdate(),e.getAddress(),e.getSex(),e.getSalary(),e.getDno().getDno(),e.getPhonenumber()});
-               i++;
-           }
-               
-       }
-
-
+        Department department = (Department) em.createNamedQuery("Department.findByDname").setParameter("dname", departmentsList.getSelectedItem().toString()).getSingleResult();
+        Collection<Employee> employees = department.getEmployeeCollection();
+        DefaultTableModel tableModel = (DefaultTableModel) tableOfData.getModel();
+        tableModel.setNumRows(0);
+        double avgSalary = 0;
+        for (Employee e : employees) {
+            avgSalary += e.getSalary();
+        }
+        avgSalary /= employees.size();
+        int i = 1;
+        for (Employee e : employees) {
+            if (e.getSalary() >= avgSalary) {
+                tableModel.addRow(new Object[]{i, e.getSsn(), e.getFullName(), e.getBdate(), e.getAddress(), e.getSex(), e.getSalary(), e.getDno().getDno(), e.getPhonenumber()});
+                i++;
+            }
+        }
     }//GEN-LAST:event_retriveDataMouseClicked
-
-    private void retriveDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retriveDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_retriveDataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
