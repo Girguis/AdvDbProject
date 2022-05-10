@@ -74,7 +74,7 @@ public class Employee implements Serializable {
     private Character sex;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Salary")
-    private BigDecimal salary;
+    private double salary;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mgrssn")
     private Collection<Department> departmentCollection;
     @JoinColumn(name = "Dno", referencedColumnName = "Dno")
@@ -89,6 +89,7 @@ public class Employee implements Serializable {
     private Collection<Dependent> dependentCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
     private Collection<WorksOn> worksOnCollection;
+   
 
     public Employee() {
     }
@@ -163,11 +164,13 @@ public class Employee implements Serializable {
         this.sex = sex;
     }
 
-    public BigDecimal getSalary() {
+    public Double getSalary() {
         return salary;
     }
+    
+   
 
-    public void setSalary(BigDecimal salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 

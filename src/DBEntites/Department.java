@@ -79,7 +79,7 @@ public class Department implements Serializable {
         this.dname = dname;
     }
 
-    public Integer getDno() {
+    public int getDno() {
         return dno;
     }
 

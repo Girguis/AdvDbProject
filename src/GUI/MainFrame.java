@@ -19,11 +19,13 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public MainFrame() {
+        em=Persistence.createEntityManagerFactory("AdvDatabaseProjectPU").createEntityManager();
         initComponents();
+        
          Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
          setBounds(0,0,screenSize.width, screenSize.height);
          setVisible(true);
-         em=Persistence.createEntityManagerFactory("AdvDatabaseProjectPU").createEntityManager();
+         
     }
 
     /**
@@ -40,24 +42,27 @@ public class MainFrame extends javax.swing.JFrame {
         employeeWithOrWithoutSupervisor1 = new GUI.EmployeeWithOrWithoutSupervisor();
         empWithMinSalary1 = new GUI.EmployeesWithMinMaxSalary();
         departmentWithAvgSalaries1 = new GUI.DepartmentWithAvgSalaries();
+        employeeByCountry1 = new GUI.EmployeeByCountry();
+        researchDepartmentEmployees2 = new GUI.ResearchDepartmentEmployees();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         Tabbedpane.addTab("All Employees", getAllEmployees);
         Tabbedpane.addTab("With/out supervisor", employeeWithOrWithoutSupervisor1);
         Tabbedpane.addTab("min Salary", empWithMinSalary1);
         Tabbedpane.addTab("Departments with avg salaries", departmentWithAvgSalaries1);
+        Tabbedpane.addTab("Emp By Country", employeeByCountry1);
+        Tabbedpane.addTab("research department's  employees", researchDepartmentEmployees2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Tabbedpane, javax.swing.GroupLayout.DEFAULT_SIZE, 1541, Short.MAX_VALUE)
+            .addComponent(Tabbedpane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Tabbedpane, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+            .addComponent(Tabbedpane, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
 
         pack();
@@ -104,7 +109,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane Tabbedpane;
     private GUI.DepartmentWithAvgSalaries departmentWithAvgSalaries1;
     private GUI.EmployeesWithMinMaxSalary empWithMinSalary1;
+    private GUI.EmployeeByCountry employeeByCountry1;
     private GUI.EmployeeWithOrWithoutSupervisor employeeWithOrWithoutSupervisor1;
     private GUI.GetAllEmployees getAllEmployees;
+    private GUI.ResearchDepartmentEmployees researchDepartmentEmployees2;
     // End of variables declaration//GEN-END:variables
 }
