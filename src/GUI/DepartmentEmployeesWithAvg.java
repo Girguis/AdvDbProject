@@ -9,6 +9,7 @@ import DBEntites.Department;
 import DBEntites.Employee;
 
 import static GUI.MainFrame.em;
+import java.util.Collection;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,12 +17,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Girguis
  */
-public class ResearchDepartmentEmployees extends javax.swing.JPanel {
+public class DepartmentEmployeesWithAvg extends javax.swing.JPanel {
 
     /**
      * Creates new form EmployeeWithOrWithoutSupervisor
      */
-    public ResearchDepartmentEmployees() {
+    public DepartmentEmployeesWithAvg() {
         
         initComponents();
         initList();
@@ -43,8 +44,6 @@ private void initList(){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        radioGroup = new javax.swing.ButtonGroup();
-        title = new javax.swing.JLabel();
         retriveData = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -53,12 +52,15 @@ private void initList(){
         jLabel2 = new javax.swing.JLabel();
         departmentsList = new javax.swing.JComboBox<>();
 
-        title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-
         retriveData.setText("Retrive");
         retriveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 retriveDataMouseClicked(evt);
+            }
+        });
+        retriveData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                retriveDataActionPerformed(evt);
             }
         });
 
@@ -109,47 +111,40 @@ private void initList(){
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(title))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(retriveData, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(departmentsList, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(departmentsList, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(retriveData, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(107, 107, 107))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(title)
-                .addGap(117, 117, 117)
+                .addGap(128, 128, 128)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(departmentsList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
                 .addComponent(retriveData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel2)
-                .addGap(44, 44, 44))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void retriveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retriveDataMouseClicked
-       List<Department> departments=em.createNamedQuery("Department.findByDname").setParameter("dname", departmentsList.getSelectedItem().toString()).getResultList();
-
-       //List<Employee> employees = em.createNamedQuery("Employee.findAll").getResultList();
-       Department department = (Department) em.createNamedQuery("Department.findByDname").setParameter("dname", "research").getSingleResult();
-       List<Employee> employees = (List<Employee>) department.getEmployeeCollection();
+       
+       Department department = (Department) em.createNamedQuery("Department.findByDname").setParameter("dname", departmentsList.getSelectedItem().toString()).getSingleResult();
+       Collection<Employee> employees = department.getEmployeeCollection();
        DefaultTableModel tableModel= (DefaultTableModel) tableOfData.getModel();
        tableModel.setNumRows(0);
        double avgSalary=0;
@@ -172,6 +167,10 @@ private void initList(){
 
     }//GEN-LAST:event_retriveDataMouseClicked
 
+    private void retriveDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retriveDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_retriveDataActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> departmentsList;
@@ -179,9 +178,7 @@ private void initList(){
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.ButtonGroup radioGroup;
     private javax.swing.JButton retriveData;
     private javax.swing.JTable tableOfData;
-    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

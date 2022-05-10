@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Girguis
+ * @author Momen
  */
 public class EmployeeByCountry extends javax.swing.JPanel {
 
@@ -32,7 +32,6 @@ public class EmployeeByCountry extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        radioGroup = new javax.swing.ButtonGroup();
         title = new javax.swing.JLabel();
         retriveData = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -58,7 +57,7 @@ public class EmployeeByCountry extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "no.", "Full Name", "Address"
             }
         ));
         jScrollPane1.setViewportView(tableOfData);
@@ -132,7 +131,6 @@ public class EmployeeByCountry extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.ButtonGroup radioGroup;
     private javax.swing.JButton retriveData;
     private javax.swing.JTable tableOfData;
     private javax.swing.JLabel title;

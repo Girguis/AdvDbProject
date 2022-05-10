@@ -9,6 +9,7 @@ import DBEntites.Department;
 import DBEntites.Employee;
 import DBEntites.Project;
 import static GUI.MainFrame.em;
+import java.util.Collection;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Girguis
  */
 public class EmployeesByProject extends javax.swing.JPanel {
+
     /**
      * Creates new form EmployeeWithOrWithoutSupervisor
      */
@@ -24,15 +26,15 @@ public class EmployeesByProject extends javax.swing.JPanel {
         initComponents();
         initList();
     }
-private void initList()
-{
+
+    private void initList() {
         List<Project> Allprojects = em.createNamedQuery("Project.findAll").getResultList();
-        for(Project p: Allprojects)
-        {
+        for (Project p : Allprojects) {
             projectsList.addItem(p.getPname());
         }
 
-}
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,7 +44,6 @@ private void initList()
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        radioGroup = new javax.swing.ButtonGroup();
         title = new javax.swing.JLabel();
         retriveData = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -50,7 +51,6 @@ private void initList()
         tableOfData = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         projectsList = new javax.swing.JComboBox<>();
-        title1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         inSalary = new javax.swing.JTextField();
 
@@ -116,9 +116,6 @@ private void initList()
             }
         });
 
-        title1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        title1.setText("note : his/her salary greater than 3000");
-
         jLabel2.setText("more salary");
 
         inSalary.setText(" ");
@@ -132,7 +129,6 @@ private void initList()
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(title1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(11, 11, 11)
                                 .addComponent(title))
@@ -166,29 +162,26 @@ private void initList()
                     .addComponent(inSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(retriveData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(title1)
-                .addGap(39, 39, 39))
+                .addGap(94, 94, 94))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void retriveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retriveDataMouseClicked
-     double Salary = Double.parseDouble(inSalary.getText());
-         List<Project> projects=em.createNamedQuery("Project.findByPname").setParameter("pname", projectsList.getSelectedItem().toString()).getResultList();
-       List<Employee> employees = em.createNamedQuery("Employee.findAll").getResultList();
-       DefaultTableModel tableModel= (DefaultTableModel) tableOfData.getModel();
-       tableModel.setNumRows(0);
-       int i=1;
-       for(Project p : projects)
-       {
-           for (Employee e : employees) {
-               if(e.getSalary()>Salary && e.getDno()==p.getDno()) {
-                   tableModel.addRow(new Object[]{i,e.getFullName(),e.getSalary(),p.getPname()});
-               }
-           }
-           i++;
-       }
+        Project project = (Project) em.createNamedQuery("Project.findByPname").setParameter("pname", projectsList.getSelectedItem().toString()).getSingleResult();
+        DefaultTableModel tableModel = (DefaultTableModel) tableOfData.getModel();
+        tableModel.setNumRows(0);
+        int i = 1;
+        if (!inSalary.getText().isEmpty()) {
+            Double salary = Double.parseDouble(inSalary.getText());
+            Collection<Employee> employees = project.getDno().getEmployeeCollection();
+            for (Employee e : employees) {
+                if (e.getSalary() >= salary) {
+                    tableModel.addRow(new Object[]{i, e.getFullName(), e.getSalary(), project.getPname()});
+                    i++;
+                }
+            }
+        }
     }//GEN-LAST:event_retriveDataMouseClicked
 
     private void projectsListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectsListActionPerformed
@@ -203,10 +196,8 @@ private void initList()
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> projectsList;
-    private javax.swing.ButtonGroup radioGroup;
     private javax.swing.JButton retriveData;
     private javax.swing.JTable tableOfData;
     private javax.swing.JLabel title;
-    private javax.swing.JLabel title1;
     // End of variables declaration//GEN-END:variables
 }
