@@ -41,10 +41,14 @@ public class MainFrame extends javax.swing.JFrame {
         employeeByCountry1 = new GUI.EmployeeByCountry();
         employeeWithOrWithoutSupervisor1 = new GUI.EmployeeWithOrWithoutSupervisor();
         employeesWithMinMaxSalary1 = new GUI.EmployeesWithMinMaxSalary();
-        getAllEmployees1 = new GUI.GetAllEmployees();
         empCountByDep1 = new GUI.EmpCountByDep();
-        salaryIncrease1 = new GUI.SalaryIncrease();
+        employeeWithDepLocation1 = new GUI.EmployeeWithDepLocation();
+        sumSalaries1 = new GUI.SumSalaries();
+        empWithSpouse1 = new GUI.EmpWithSpouse();
+        departmentEmployeesWithAvg1 = new GUI.DepartmentEmployeesWithAvg();
         employeesByDepAndProject1 = new GUI.EmployeesByDepAndProject();
+        employeesByProject1 = new GUI.EmployeesByProject();
+        salaryIncrease1 = new GUI.SalaryIncrease();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,10 +56,14 @@ public class MainFrame extends javax.swing.JFrame {
         jTabbedPane1.addTab("EmployeeByCountry", employeeByCountry1);
         jTabbedPane1.addTab("EmployeeWithOrWithoutSupervisor", employeeWithOrWithoutSupervisor1);
         jTabbedPane1.addTab("EmployeesWithMinMaxSalary", employeesWithMinMaxSalary1);
-        jTabbedPane1.addTab("GetAllEmployees", getAllEmployees1);
         jTabbedPane1.addTab("Emp count by dep", empCountByDep1);
-        jTabbedPane1.addTab("Increase salary", salaryIncrease1);
-        jTabbedPane1.addTab("Employees by dep and project", employeesByDepAndProject1);
+        jTabbedPane1.addTab("EmpWithLocation", employeeWithDepLocation1);
+        jTabbedPane1.addTab("SumSalary", sumSalaries1);
+        jTabbedPane1.addTab("EmpWithSpouse", empWithSpouse1);
+        jTabbedPane1.addTab("DepartmentEmployeesWithAvg", departmentEmployeesWithAvg1);
+        jTabbedPane1.addTab("EmployeesByDepAndProject", employeesByDepAndProject1);
+        jTabbedPane1.addTab("EmployeesByProject", employeesByProject1);
+        jTabbedPane1.addTab("SalaryIncrease", salaryIncrease1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,14 +115,18 @@ public class MainFrame extends javax.swing.JFrame {
     }
     public static EntityManager em;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private GUI.DepartmentEmployeesWithAvg departmentEmployeesWithAvg1;
     private GUI.DepartmentWithAvgSalaries departmentWithAvgSalaries1;
     private GUI.EmpCountByDep empCountByDep1;
+    private GUI.EmpWithSpouse empWithSpouse1;
     private GUI.EmployeeByCountry employeeByCountry1;
+    private GUI.EmployeeWithDepLocation employeeWithDepLocation1;
     private GUI.EmployeeWithOrWithoutSupervisor employeeWithOrWithoutSupervisor1;
     private GUI.EmployeesByDepAndProject employeesByDepAndProject1;
+    private GUI.EmployeesByProject employeesByProject1;
     private GUI.EmployeesWithMinMaxSalary employeesWithMinMaxSalary1;
-    private GUI.GetAllEmployees getAllEmployees1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private GUI.SalaryIncrease salaryIncrease1;
+    private GUI.SumSalaries sumSalaries1;
     // End of variables declaration//GEN-END:variables
 }

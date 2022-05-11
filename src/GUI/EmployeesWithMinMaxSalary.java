@@ -44,7 +44,7 @@ public class EmployeesWithMinMaxSalary extends javax.swing.JPanel {
         title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         title.setText("<html>Employees with<br>mininum or maximum<br>salary");
 
-        retrive.setText("Retrive");
+        retrive.setText("Retrieve");
         retrive.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 retriveMouseClicked(evt);

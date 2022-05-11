@@ -43,7 +43,7 @@ public class DepartmentWithAvgSalaries extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("<html>Departments list with<br>Avg of employees salaries");
 
-        retrive.setText("Retrive");
+        retrive.setText("Retrieve");
         retrive.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 retriveMouseClicked(evt);

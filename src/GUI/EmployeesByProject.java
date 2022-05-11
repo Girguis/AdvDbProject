@@ -55,7 +55,7 @@ public class EmployeesByProject extends javax.swing.JPanel {
         title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         title.setText("Emp By project");
 
-        retriveData.setText("Retrive");
+        retriveData.setText("Retrieve");
         retriveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 retriveDataMouseClicked(evt);

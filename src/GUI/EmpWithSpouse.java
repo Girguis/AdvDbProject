@@ -1,25 +1,28 @@
+package GUI;
+
+import DBEntites.Dependent;
+import DBEntites.Employee;
+import static GUI.MainFrame.em;
+import java.util.Collection;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
-
-import DBEntites.Department;
-import static GUI.MainFrame.em;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Girguis
+ * @author Ahmed Salem
  */
-public class EmpCountByDep extends javax.swing.JPanel {
+public class EmpWithSpouse extends javax.swing.JPanel {
 
     /**
-     * Creates new form EmpCountByDep
+     * Creates new form EmpWithSpouse
      */
-    public EmpCountByDep() {
+    public EmpWithSpouse() {
         initComponents();
     }
 
@@ -33,18 +36,18 @@ public class EmpCountByDep extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        retrive = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOfData = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("<html>Employees count<br>for each department");
+        jLabel1.setText("<html>List the name of each <br>employee and his/her spouse");
 
-        retrive.setText("Retrieve");
-        retrive.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton1.setText("Retrieve");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                retriveMouseClicked(evt);
+                jButton1MouseClicked(evt);
             }
         });
 
@@ -53,7 +56,7 @@ public class EmpCountByDep extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Dep name", "Employee count"
+                "EmployeeName", "SpouseName"
             }
         ));
         jScrollPane1.setViewportView(tableOfData);
@@ -62,11 +65,11 @@ public class EmpCountByDep extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -77,10 +80,10 @@ public class EmpCountByDep extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(retrive)))
+                        .addGap(59, 59, 59)
+                        .addComponent(jButton1)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -89,29 +92,33 @@ public class EmpCountByDep extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
-                .addComponent(retrive)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addGap(79, 79, 79)
+                .addComponent(jButton1)
+                .addContainerGap(251, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void retriveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retriveMouseClicked
-        DefaultTableModel tableModel = (DefaultTableModel) tableOfData.getModel();
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel tableModel=(DefaultTableModel) tableOfData.getModel();
         tableModel.setNumRows(0);
-        List<Department> deps= em.createNamedQuery("Department.findAll").getResultList();
-        for(Department d : deps)
-        {
-            tableModel.addRow(new Object[]{d.getDname(),d.getEmployeeCollection().size()});
+        List<Employee> emps=em.createNamedQuery("Employee.findAll").getResultList();
+        for(Employee emp:emps){
+            Collection<Dependent> dependent = emp.getDependentCollection();
+            for(Dependent dep: dependent){
+                if(dep.getRelationship().equalsIgnoreCase("Spouse"))
+                    tableModel.addRow(new Object[]{emp.getFullName(),dep.getDependentPK().getDependentname()});
+            }
         }
-    }//GEN-LAST:event_retriveMouseClicked
+    }//GEN-LAST:event_jButton1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton retrive;
     private javax.swing.JTable tableOfData;
     // End of variables declaration//GEN-END:variables
 }

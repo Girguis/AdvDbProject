@@ -51,7 +51,7 @@ public class DepartmentEmployeesWithAvg extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         departmentsList = new javax.swing.JComboBox<>();
 
-        retriveData.setText("Retrive");
+        retriveData.setText("Retrieve");
         retriveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 retriveDataMouseClicked(evt);

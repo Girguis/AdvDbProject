@@ -79,7 +79,7 @@ public class EmployeesByDepAndProject extends javax.swing.JPanel {
             }
         });
 
-        retrive.setText("Retrive");
+        retrive.setText("Retrieve");
         retrive.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 retriveMouseClicked(evt);

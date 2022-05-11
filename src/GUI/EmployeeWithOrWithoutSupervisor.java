@@ -51,7 +51,7 @@ public class EmployeeWithOrWithoutSupervisor extends javax.swing.JPanel {
         radioGroup.add(withoutRadioBtn);
         withoutRadioBtn.setText("without supervisor");
 
-        retriveData.setText("Retrive");
+        retriveData.setText("Retrieve");
         retriveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 retriveDataMouseClicked(evt);

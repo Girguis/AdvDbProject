@@ -73,15 +73,6 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="GUI.GetAllEmployees" name="getAllEmployees1">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="GetAllEmployees">
-                <Property name="tabTitle" type="java.lang.String" value="GetAllEmployees"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-        </Component>
         <Component class="GUI.EmpCountByDep" name="empCountByDep1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
@@ -91,11 +82,38 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="GUI.SalaryIncrease" name="salaryIncrease1">
+        <Component class="GUI.EmployeeWithDepLocation" name="employeeWithDepLocation1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Increase salary">
-                <Property name="tabTitle" type="java.lang.String" value="Increase salary"/>
+              <JTabbedPaneConstraints tabName="EmpWithLocation">
+                <Property name="tabTitle" type="java.lang.String" value="EmpWithLocation"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="GUI.SumSalaries" name="sumSalaries1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="SumSalary">
+                <Property name="tabTitle" type="java.lang.String" value="SumSalary"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="GUI.EmpWithSpouse" name="empWithSpouse1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="EmpWithSpouse">
+                <Property name="tabTitle" type="java.lang.String" value="EmpWithSpouse"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="GUI.DepartmentEmployeesWithAvg" name="departmentEmployeesWithAvg1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="DepartmentEmployeesWithAvg">
+                <Property name="tabTitle" type="java.lang.String" value="DepartmentEmployeesWithAvg"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -103,8 +121,26 @@
         <Component class="GUI.EmployeesByDepAndProject" name="employeesByDepAndProject1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Employees by dep and project">
-                <Property name="tabTitle" type="java.lang.String" value="Employees by dep and project"/>
+              <JTabbedPaneConstraints tabName="EmployeesByDepAndProject">
+                <Property name="tabTitle" type="java.lang.String" value="EmployeesByDepAndProject"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="GUI.EmployeesByProject" name="employeesByProject1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="EmployeesByProject">
+                <Property name="tabTitle" type="java.lang.String" value="EmployeesByProject"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="GUI.SalaryIncrease" name="salaryIncrease1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="SalaryIncrease">
+                <Property name="tabTitle" type="java.lang.String" value="SalaryIncrease"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
