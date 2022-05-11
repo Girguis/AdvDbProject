@@ -117,7 +117,7 @@ public class EmployeeByCountry extends javax.swing.JPanel {
        int i=1;
        for(Employee e : employees)
        {
-           if(e.getAddress().contains(country)&&!country.equals("")){
+           if(e.getAddress().toLowerCase().contains(country.toLowerCase())&&!country.equals("")){
             tableModel.addRow(new Object[]{i,e.getFullName(),e.getAddress()});
             i++;
            }

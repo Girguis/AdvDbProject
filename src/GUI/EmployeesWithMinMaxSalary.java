@@ -116,19 +116,43 @@ public class EmployeesWithMinMaxSalary extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void retriveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retriveMouseClicked
-        List<Employee> employees;
-        if(minSal.isSelected())
-            employees = em.createNamedQuery("Employee.findByMinSalary").getResultList();
-        else
-            employees = em.createNamedQuery("Employee.findByMaxSalary").getResultList();
+        List<Employee> employees = em.createNamedQuery("Employee.findAll").getResultList();
+        double sal = employees.get(0).getSalary();
+        if (minSal.isSelected()) {
+            for (Employee e : employees) {
+                if (e.getSalary() < sal) {
+                    sal = e.getSalary();
+                }
+            }
+        } else {
+            for (Employee e : employees) {
+                if (e.getSalary() > sal) {
+                    sal = e.getSalary();
+                }
+            }
+        }
         DefaultTableModel tableModel = (DefaultTableModel) tableOfData.getModel();
         tableModel.setNumRows(0);
-        int i=1;
-        for(Employee e : employees)
-        {
-            tableModel.addRow(new Object[]{i,e.getFullName(),e.getSalary(),e.getPhonenumber()});
-            i++;
+        int i = 1;
+        for (Employee e : employees) {
+            if (e.getSalary() == sal) {
+                tableModel.addRow(new Object[]{i, e.getFullName(), e.getSalary(), e.getPhonenumber()});
+                i++;
+            }
         }
+//        List<Employee> employees;
+//        if(minSal.isSelected())
+//            employees = em.createNamedQuery("Employee.findByMinSalary").getResultList();
+//        else
+//            employees = em.createNamedQuery("Employee.findByMaxSalary").getResultList();
+//        DefaultTableModel tableModel = (DefaultTableModel) tableOfData.getModel();
+//        tableModel.setNumRows(0);
+//        int i=1;
+//        for(Employee e : employees)
+//        {
+//            tableModel.addRow(new Object[]{i,e.getFullName(),e.getSalary(),e.getPhonenumber()});
+//            i++;
+//        }
     }//GEN-LAST:event_retriveMouseClicked
 
 
