@@ -24,6 +24,7 @@ public class EmpWithSpouse extends javax.swing.JPanel {
      */
     public EmpWithSpouse() {
         initComponents();
+        tableModel=(DefaultTableModel) tableOfData.getModel();
     }
 
     /**
@@ -36,7 +37,7 @@ public class EmpWithSpouse extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        retrieveData = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOfData = new javax.swing.JTable();
@@ -44,10 +45,10 @@ public class EmpWithSpouse extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("<html>List the name of each <br>employee and his/her spouse");
 
-        jButton1.setText("Retrieve");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        retrieveData.setText("Retrieve");
+        retrieveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                retrieveDataMouseClicked(evt);
             }
         });
 
@@ -83,7 +84,7 @@ public class EmpWithSpouse extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(59, 59, 59)
-                        .addComponent(jButton1)))
+                        .addComponent(retrieveData)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -93,15 +94,13 @@ public class EmpWithSpouse extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79)
-                .addComponent(jButton1)
+                .addComponent(retrieveData)
                 .addContainerGap(251, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-        DefaultTableModel tableModel=(DefaultTableModel) tableOfData.getModel();
+    private void retrieveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retrieveDataMouseClicked
         tableModel.setNumRows(0);
         List<Employee> emps=em.createNamedQuery("Employee.findAll").getResultList();
         for(Employee emp:emps){
@@ -111,14 +110,14 @@ public class EmpWithSpouse extends javax.swing.JPanel {
                     tableModel.addRow(new Object[]{emp.getFullName(),dep.getDependentPK().getDependentname()});
             }
         }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_retrieveDataMouseClicked
 
-
+    private DefaultTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton retrieveData;
     private javax.swing.JTable tableOfData;
     // End of variables declaration//GEN-END:variables
 }

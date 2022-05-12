@@ -24,7 +24,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                      <Component id="retrive" min="-2" max="-2" attributes="0"/>
+                      <Component id="retrieveData" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -38,7 +38,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-              <Component id="retrive" min="-2" max="-2" attributes="0"/>
+              <Component id="retrieveData" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="195" max="32767" attributes="0"/>
           </Group>
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
@@ -54,12 +54,12 @@
         <Property name="text" type="java.lang.String" value="&lt;html&gt;Employees count&lt;br&gt;for each department"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="retrive">
+    <Component class="javax.swing.JButton" name="retrieveData">
       <Properties>
         <Property name="text" type="java.lang.String" value="Retrieve"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="retriveMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="retrieveDataMouseClicked"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">

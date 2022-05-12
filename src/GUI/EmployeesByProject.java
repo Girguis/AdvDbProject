@@ -8,6 +8,7 @@ package GUI;
 import DBEntites.Employee;
 import DBEntites.Project;
 import static GUI.MainFrame.em;
+import java.awt.event.KeyEvent;
 import java.util.Collection;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +25,7 @@ public class EmployeesByProject extends javax.swing.JPanel {
     public EmployeesByProject() {
         initComponents();
         initList();
+        tableModel = (DefaultTableModel) tableOfData.getModel();
     }
 
     private void initList() {
@@ -43,7 +45,7 @@ public class EmployeesByProject extends javax.swing.JPanel {
     private void initComponents() {
 
         title = new javax.swing.JLabel();
-        retriveData = new javax.swing.JButton();
+        retrieveData = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         projectsList = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -52,13 +54,13 @@ public class EmployeesByProject extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOfData = new javax.swing.JTable();
 
-        title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        title.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         title.setText("Emp By project");
 
-        retriveData.setText("Retrieve");
-        retriveData.addMouseListener(new java.awt.event.MouseAdapter() {
+        retrieveData.setText("Retrieve");
+        retrieveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                retriveDataMouseClicked(evt);
+                retrieveDataMouseClicked(evt);
             }
         });
 
@@ -67,13 +69,15 @@ public class EmployeesByProject extends javax.swing.JPanel {
         jLabel2.setText("more salary");
 
         inSalary.setText(" ");
+        inSalary.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inSalaryKeyTyped(evt);
+            }
+        });
 
         tableOfData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "No.", "Full name", "Salary", "Project name"
@@ -101,20 +105,18 @@ public class EmployeesByProject extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(title))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(projectsList, 0, 138, Short.MAX_VALUE)
-                                    .addComponent(inSalary)))))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(projectsList, 0, 138, Short.MAX_VALUE)
+                            .addComponent(inSalary)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(115, 115, 115)
-                        .addComponent(retriveData, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(retrieveData, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(title)))
                 .addGap(17, 17, 17)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -132,15 +134,14 @@ public class EmployeesByProject extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(inSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
-                .addComponent(retriveData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addComponent(retrieveData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(160, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void retriveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retriveDataMouseClicked
+    private void retrieveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retrieveDataMouseClicked
         Project project = (Project) em.createNamedQuery("Project.findByPname").setParameter("pname", projectsList.getSelectedItem().toString()).getSingleResult();
-        DefaultTableModel tableModel = (DefaultTableModel) tableOfData.getModel();
         tableModel.setNumRows(0);
         int i = 1;
         if (!inSalary.getText().isEmpty()) {
@@ -153,9 +154,14 @@ public class EmployeesByProject extends javax.swing.JPanel {
                 }
             }
         }
-    }//GEN-LAST:event_retriveDataMouseClicked
+    }//GEN-LAST:event_retrieveDataMouseClicked
 
+    private void inSalaryKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inSalaryKeyTyped
+        if (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE)
+            evt.consume();
+    }//GEN-LAST:event_inSalaryKeyTyped
 
+    private DefaultTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField inSalary;
     private javax.swing.JLabel jLabel1;
@@ -163,7 +169,7 @@ public class EmployeesByProject extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> projectsList;
-    private javax.swing.JButton retriveData;
+    private javax.swing.JButton retrieveData;
     private javax.swing.JTable tableOfData;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables

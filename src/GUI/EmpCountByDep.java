@@ -21,6 +21,7 @@ public class EmpCountByDep extends javax.swing.JPanel {
      */
     public EmpCountByDep() {
         initComponents();
+        tableModel = (DefaultTableModel) tableOfData.getModel();
     }
 
     /**
@@ -33,7 +34,7 @@ public class EmpCountByDep extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        retrive = new javax.swing.JButton();
+        retrieveData = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOfData = new javax.swing.JTable();
@@ -41,10 +42,10 @@ public class EmpCountByDep extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("<html>Employees count<br>for each department");
 
-        retrive.setText("Retrieve");
-        retrive.addMouseListener(new java.awt.event.MouseAdapter() {
+        retrieveData.setText("Retrieve");
+        retrieveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                retriveMouseClicked(evt);
+                retrieveDataMouseClicked(evt);
             }
         });
 
@@ -80,7 +81,7 @@ public class EmpCountByDep extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
-                        .addComponent(retrive)))
+                        .addComponent(retrieveData)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -90,28 +91,27 @@ public class EmpCountByDep extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83)
-                .addComponent(retrive)
+                .addComponent(retrieveData)
                 .addContainerGap(195, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void retriveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retriveMouseClicked
-        DefaultTableModel tableModel = (DefaultTableModel) tableOfData.getModel();
+    private void retrieveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retrieveDataMouseClicked
         tableModel.setNumRows(0);
         List<Department> deps= em.createNamedQuery("Department.findAll").getResultList();
         for(Department d : deps)
         {
             tableModel.addRow(new Object[]{d.getDname(),d.getEmployeeCollection().size()});
         }
-    }//GEN-LAST:event_retriveMouseClicked
+    }//GEN-LAST:event_retrieveDataMouseClicked
 
-
+    private DefaultTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton retrive;
+    private javax.swing.JButton retrieveData;
     private javax.swing.JTable tableOfData;
     // End of variables declaration//GEN-END:variables
 }

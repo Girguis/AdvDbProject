@@ -25,6 +25,8 @@ public class SalaryIncrease extends javax.swing.JPanel {
     public SalaryIncrease() {
         initComponents();
         initList();
+        bUpdateTableModel = (DefaultTableModel) beforeUpdateTable.getModel();
+        aUpdateTableModel=(DefaultTableModel) afterUpdateTable.getModel();
     }
 
     private void initList() {
@@ -189,21 +191,17 @@ public class SalaryIncrease extends javax.swing.JPanel {
         if (!increasePersentage.getText().isEmpty()) {
             Department dep = (Department) em.createNamedQuery("Department.findByDname").setParameter("dname", depsList.getSelectedItem().toString()).getSingleResult();
             Collection<Employee> empsBeforeUpdate = dep.getEmployeeCollection();
-            DefaultTableModel tableModel = (DefaultTableModel) beforeUpdateTable.getModel();
-            tableModel.setNumRows(0);
+            bUpdateTableModel.setNumRows(0);
             float salaryIncreaseVal = Float.parseFloat(increasePersentage.getText()) / 100;
-
             em.getTransaction().begin();
             for (Employee e : empsBeforeUpdate) {
-                tableModel.addRow(new Object[]{e.getFullName(), e.getSalary(), dep.getDname()});
+                bUpdateTableModel.addRow(new Object[]{e.getFullName(), e.getSalary(), dep.getDname()});
                 e.setSalary(e.getSalary() + e.getSalary() * salaryIncreaseVal);
             }
             em.getTransaction().commit();
-
-            tableModel = (DefaultTableModel) afterUpdateTable.getModel();
-            tableModel.setNumRows(0);
+            aUpdateTableModel.setNumRows(0);
             for (Employee e : empsBeforeUpdate) {
-                tableModel.addRow(new Object[]{e.getFullName(), e.getSalary(), dep.getDname()});
+                aUpdateTableModel.addRow(new Object[]{e.getFullName(), e.getSalary(), dep.getDname()});
             }
         }
     }//GEN-LAST:event_updateSalMouseClicked
@@ -213,7 +211,7 @@ public class SalaryIncrease extends javax.swing.JPanel {
             evt.consume();
     }//GEN-LAST:event_increasePersentageKeyTyped
 
-
+    private DefaultTableModel bUpdateTableModel,aUpdateTableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable afterUpdateTable;
     private javax.swing.JTable beforeUpdateTable;

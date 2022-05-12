@@ -10,7 +10,6 @@ import DBEntites.Employee;
 import static GUI.MainFrame.em;
 import java.util.Collection;
 import java.util.List;
-import javafx.print.Collation;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,6 +23,7 @@ public class EmployeeWithDepLocation extends javax.swing.JPanel {
      */
     public EmployeeWithDepLocation() {
         initComponents();
+        tableModel= (DefaultTableModel) tableOfData.getModel();
     }
 
     /**
@@ -36,7 +36,7 @@ public class EmployeeWithDepLocation extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        Retrieve = new javax.swing.JButton();
+        retrieveData = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableOfData = new javax.swing.JTable();
@@ -44,11 +44,11 @@ public class EmployeeWithDepLocation extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("<html>Retrieve the name of each <br>employee and his department location");
 
-        Retrieve.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Retrieve.setText("Retrieve");
-        Retrieve.addMouseListener(new java.awt.event.MouseAdapter() {
+        retrieveData.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        retrieveData.setText("Retrieve");
+        retrieveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RetrieveMouseClicked(evt);
+                retrieveDataMouseClicked(evt);
             }
         });
 
@@ -84,25 +84,24 @@ public class EmployeeWithDepLocation extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(66, 66, 66)
-                        .addComponent(Retrieve)))
+                        .addComponent(retrieveData)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86)
-                .addComponent(Retrieve)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117)
+                .addComponent(retrieveData)
                 .addGap(0, 166, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RetrieveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RetrieveMouseClicked
-
+    private void retrieveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retrieveDataMouseClicked
         List<Employee> emps = em.createNamedQuery("Employee.findAll").getResultList();
-        DefaultTableModel tableModel = (DefaultTableModel) tableOfData.getModel();
         tableModel.setNumRows(0);
         for (Employee e : emps) {
             Collection<DeptLocations> deplocat = e.getDno().getDeptLocationsCollection();
@@ -110,20 +109,17 @@ public class EmployeeWithDepLocation extends javax.swing.JPanel {
             for (DeptLocations depl : deplocat) {
                 location += depl.getDeptLocationsPK().getDlocation() + ",";
             }
-
             location = location.substring(0, location.length() - 1);
-
-            tableModel.addRow(new Object[]{e.getFullName(), e.getDno().getDname(),location});
+            tableModel.addRow(new Object[]{e.getFullName(), e.getDno().getDname(), location});
         }
+    }//GEN-LAST:event_retrieveDataMouseClicked
 
-    }//GEN-LAST:event_RetrieveMouseClicked
-
-
+    private DefaultTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Retrieve;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton retrieveData;
     private javax.swing.JTable tableOfData;
     // End of variables declaration//GEN-END:variables
 }

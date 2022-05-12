@@ -9,6 +9,8 @@ import DBEntites.Department;
 import DBEntites.Employee;
 
 import static GUI.MainFrame.em;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +27,8 @@ public class DepartmentEmployeesWithAvg extends javax.swing.JPanel {
     public DepartmentEmployeesWithAvg() {
         initComponents();
         initList();
+        tableModel = (DefaultTableModel) tableOfData.getModel();
+        dateFormat=new SimpleDateFormat("yyyy-mm-dd");   
     }
 
     private void initList() {
@@ -33,7 +37,6 @@ public class DepartmentEmployeesWithAvg extends javax.swing.JPanel {
             departmentsList.addItem(d.getDname());
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,18 +46,19 @@ public class DepartmentEmployeesWithAvg extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        retriveData = new javax.swing.JButton();
+        retrieveData = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOfData = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         departmentsList = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
 
-        retriveData.setText("Retrieve");
-        retriveData.addMouseListener(new java.awt.event.MouseAdapter() {
+        retrieveData.setText("Retrieve");
+        retrieveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                retriveDataMouseClicked(evt);
+                retrieveDataMouseClicked(evt);
             }
         });
 
@@ -67,7 +71,7 @@ public class DepartmentEmployeesWithAvg extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -97,6 +101,9 @@ public class DepartmentEmployeesWithAvg extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("note: greater than avg salaries in this department");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setText("<html>Department employees with<br>salary more than avg");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,7 +120,10 @@ public class DepartmentEmployeesWithAvg extends javax.swing.JPanel {
                                 .addComponent(departmentsList, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
-                        .addComponent(retriveData, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(retrieveData, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(1, 1, 1))
@@ -121,23 +131,24 @@ public class DepartmentEmployeesWithAvg extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(departmentsList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
-                .addComponent(retriveData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(retrieveData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jLabel2)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void retriveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retriveDataMouseClicked
+    private void retrieveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retrieveDataMouseClicked
         Department department = (Department) em.createNamedQuery("Department.findByDname").setParameter("dname", departmentsList.getSelectedItem().toString()).getSingleResult();
         Collection<Employee> employees = department.getEmployeeCollection();
-        DefaultTableModel tableModel = (DefaultTableModel) tableOfData.getModel();
         tableModel.setNumRows(0);
         double avgSalary = 0;
         for (Employee e : employees) {
@@ -147,20 +158,21 @@ public class DepartmentEmployeesWithAvg extends javax.swing.JPanel {
         int i = 1;
         for (Employee e : employees) {
             if (e.getSalary() >= avgSalary) {
-                tableModel.addRow(new Object[]{i, e.getSsn(), e.getFullName(), e.getBdate(), e.getAddress(), e.getSex(), e.getSalary(), e.getDno().getDno(), e.getPhonenumber()});
+                tableModel.addRow(new Object[]{i, e.getSsn(), e.getFullName(),dateFormat.format(e.getBdate()), e.getAddress(), e.getSex(), e.getSalary(), e.getDno().getDno(), e.getPhonenumber()});
                 i++;
             }
         }
-    }//GEN-LAST:event_retriveDataMouseClicked
-
-
+    }//GEN-LAST:event_retrieveDataMouseClicked
+    private DateFormat dateFormat;
+    private DefaultTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> departmentsList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton retriveData;
+    private javax.swing.JButton retrieveData;
     private javax.swing.JTable tableOfData;
     // End of variables declaration//GEN-END:variables
 }

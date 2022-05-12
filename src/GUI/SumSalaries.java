@@ -23,6 +23,7 @@ public class SumSalaries extends javax.swing.JPanel {
      */
     public SumSalaries() {
         initComponents();
+        tableModel = (DefaultTableModel) tableOfData.getModel();
     }
 
     /**
@@ -35,7 +36,7 @@ public class SumSalaries extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        retrieveData = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOfData = new javax.swing.JTable();
@@ -43,11 +44,11 @@ public class SumSalaries extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("<html>List the summation of salaries for<br> each department that are paid<br>to their employees.");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Retrieve");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        retrieveData.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        retrieveData.setText("Retrieve");
+        retrieveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                retrieveDataMouseClicked(evt);
             }
         });
 
@@ -83,7 +84,7 @@ public class SumSalaries extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(97, 97, 97)
-                        .addComponent(jButton1)))
+                        .addComponent(retrieveData)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -91,17 +92,15 @@ public class SumSalaries extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(jButton1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(114, 114, 114)
+                .addComponent(retrieveData)
                 .addContainerGap(208, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-        DefaultTableModel tableModel = (DefaultTableModel) tableOfData.getModel();
+    private void retrieveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retrieveDataMouseClicked
         tableModel.setNumRows(0);
         List<Department> depts = em.createNamedQuery("Department.findAll").getResultList();
         for (Department dept : depts) {
@@ -112,16 +111,14 @@ public class SumSalaries extends javax.swing.JPanel {
             }
             tableModel.addRow(new Object[]{dept.getDno(),dept.getDname(),salary});
         }
+    }//GEN-LAST:event_retrieveDataMouseClicked
 
-
-    }//GEN-LAST:event_jButton1MouseClicked
-
-
+    private DefaultTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton retrieveData;
     private javax.swing.JTable tableOfData;
     // End of variables declaration//GEN-END:variables
 }

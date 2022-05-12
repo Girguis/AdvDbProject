@@ -23,6 +23,7 @@ public class DepartmentWithAvgSalaries extends javax.swing.JPanel {
      */
     public DepartmentWithAvgSalaries() {
         initComponents();
+        tableModel =(DefaultTableModel) tableOfData.getModel();
     }
 
     /**
@@ -35,18 +36,18 @@ public class DepartmentWithAvgSalaries extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        retrive = new javax.swing.JButton();
+        retrieveData = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOfData = new javax.swing.JTable();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("<html>Departments list with<br>Avg of employees salaries");
 
-        retrive.setText("Retrieve");
-        retrive.addMouseListener(new java.awt.event.MouseAdapter() {
+        retrieveData.setText("Retrieve");
+        retrieveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                retriveMouseClicked(evt);
+                retrieveDataMouseClicked(evt);
             }
         });
 
@@ -64,7 +65,7 @@ public class DepartmentWithAvgSalaries extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,8 +82,8 @@ public class DepartmentWithAvgSalaries extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(retrive)))
+                        .addGap(87, 87, 87)
+                        .addComponent(retrieveData)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -91,16 +92,15 @@ public class DepartmentWithAvgSalaries extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(retrive)
+                .addGap(55, 55, 55)
+                .addComponent(retrieveData)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void retriveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retriveMouseClicked
+    private void retrieveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retrieveDataMouseClicked
         List<Department> departments = em.createNamedQuery("Department.findAll").getResultList();
-        DefaultTableModel tableModel =(DefaultTableModel) tableOfData.getModel();
         tableModel.setNumRows(0);
         for(Department d : departments)
         {  
@@ -109,14 +109,14 @@ public class DepartmentWithAvgSalaries extends javax.swing.JPanel {
           for(Employee e : employees) { salaries +=e.getSalary(); }
           tableModel.addRow(new Object[]{d.getDno(),d.getDname(),(salaries/employees.size())});
         }
-    }//GEN-LAST:event_retriveMouseClicked
+    }//GEN-LAST:event_retrieveDataMouseClicked
 
-
+    private DefaultTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton retrive;
+    private javax.swing.JButton retrieveData;
     private javax.swing.JTable tableOfData;
     // End of variables declaration//GEN-END:variables
 }

@@ -53,7 +53,7 @@ public class EmployeesByDepAndProject extends javax.swing.JPanel {
         proList = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         workingHours = new javax.swing.JTextField();
-        retrive = new javax.swing.JButton();
+        retrieveData = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane = new javax.swing.JScrollPane();
         tableOfData = new javax.swing.JTable();
@@ -79,10 +79,10 @@ public class EmployeesByDepAndProject extends javax.swing.JPanel {
             }
         });
 
-        retrive.setText("Retrieve");
-        retrive.addMouseListener(new java.awt.event.MouseAdapter() {
+        retrieveData.setText("Retrieve");
+        retrieveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                retriveMouseClicked(evt);
+                retrieveDataMouseClicked(evt);
             }
         });
 
@@ -128,7 +128,7 @@ public class EmployeesByDepAndProject extends javax.swing.JPanel {
                                 .addComponent(depList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
-                                .addComponent(retrive, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(retrieveData, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(30, 30, 30)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -150,7 +150,7 @@ public class EmployeesByDepAndProject extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(workingHours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(retrive, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(retrieveData, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -165,7 +165,7 @@ public class EmployeesByDepAndProject extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_depListItemStateChanged
 
-    private void retriveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retriveMouseClicked
+    private void retrieveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retrieveDataMouseClicked
         if (!workingHours.getText().isEmpty()) {
             Department d = (Department) em.createNamedQuery("Department.findByDname").setParameter("dname", depList.getSelectedItem().toString()).getSingleResult();
             Collection<Employee> employees = d.getEmployeeCollection();
@@ -185,15 +185,14 @@ public class EmployeesByDepAndProject extends javax.swing.JPanel {
                 }
             }
         }
-
-    }//GEN-LAST:event_retriveMouseClicked
+    }//GEN-LAST:event_retrieveDataMouseClicked
 
     private void workingHoursKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_workingHoursKeyTyped
         if(!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar()!=KeyEvent.VK_BACK_SPACE)
             evt.consume();
     }//GEN-LAST:event_workingHoursKeyTyped
 
-    DefaultTableModel tableModel;
+    private DefaultTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> depList;
     private javax.swing.JLabel jLabel1;
@@ -203,7 +202,7 @@ public class EmployeesByDepAndProject extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JComboBox<String> proList;
-    private javax.swing.JButton retrive;
+    private javax.swing.JButton retrieveData;
     private javax.swing.JTable tableOfData;
     private javax.swing.JTextField workingHours;
     // End of variables declaration//GEN-END:variables

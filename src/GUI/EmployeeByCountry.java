@@ -21,6 +21,7 @@ public class EmployeeByCountry extends javax.swing.JPanel {
      */
     public EmployeeByCountry() {
         initComponents();
+        tableModel= (DefaultTableModel) tableOfData.getModel();
     }
 
     /**
@@ -33,20 +34,20 @@ public class EmployeeByCountry extends javax.swing.JPanel {
     private void initComponents() {
 
         title = new javax.swing.JLabel();
-        retriveData = new javax.swing.JButton();
+        retrieveData = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         inCountry = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOfData = new javax.swing.JTable();
 
-        title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        title.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         title.setText("Emp By Country");
 
-        retriveData.setText("Retrieve");
-        retriveData.addMouseListener(new java.awt.event.MouseAdapter() {
+        retrieveData.setText("Retrieve");
+        retrieveData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                retriveDataMouseClicked(evt);
+                retrieveDataMouseClicked(evt);
             }
         });
 
@@ -80,16 +81,16 @@ public class EmployeeByCountry extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(title))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
-                        .addComponent(retriveData, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(retrieveData, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(title)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -103,16 +104,15 @@ public class EmployeeByCountry extends javax.swing.JPanel {
                     .addComponent(inCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(89, 89, 89)
-                .addComponent(retriveData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addComponent(retrieveData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(98, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void retriveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retriveDataMouseClicked
+    private void retrieveDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_retrieveDataMouseClicked
        String country = inCountry.getText();
        List<Employee> employees = em.createNamedQuery("Employee.findAll").getResultList();
-       DefaultTableModel tableModel= (DefaultTableModel) tableOfData.getModel();
        tableModel.setNumRows(0);
        int i=1;
        for(Employee e : employees)
@@ -122,15 +122,15 @@ public class EmployeeByCountry extends javax.swing.JPanel {
             i++;
            }
        }
-    }//GEN-LAST:event_retriveDataMouseClicked
+    }//GEN-LAST:event_retrieveDataMouseClicked
 
-
+    private DefaultTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField inCountry;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton retriveData;
+    private javax.swing.JButton retrieveData;
     private javax.swing.JTable tableOfData;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
