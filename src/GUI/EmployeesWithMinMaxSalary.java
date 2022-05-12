@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Girguis
+ * @author Giovanni
  */
 public class EmployeesWithMinMaxSalary extends javax.swing.JPanel {
 

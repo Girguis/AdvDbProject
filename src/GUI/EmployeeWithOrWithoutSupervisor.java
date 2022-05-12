@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Girguis
+ * @author Giovanni
  */
 public class EmployeeWithOrWithoutSupervisor extends javax.swing.JPanel {
 
